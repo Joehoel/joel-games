@@ -1,0 +1,106 @@
+@import './login.css';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  padding: 12px;
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  background-color: #f6f6f6;
+  border: 1.5px solid #dddfe2;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
+  border: 1.5px solid #ff8900;
+}
+
+input[type='text']:disabled,
+input[type='email']:disabled,
+input[type='password']:disabled {
+  background-color: #fff;
+}
+
+input[type='text']::placeholder,
+input[type='email']::placeholder,
+input[type='password']::placeholder {
+  opacity: 0;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #ff8900;
+  color: #fff;
+}
+
+.divide-or {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  color: #c9c9c9;
+  z-index: 2;
+  line-height: 1;
+  margin: 1rem 0;
+}
+
+.divide-or::before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 45%;
+  height: 2px;
+  background-color: #c9c9c9;
+}
+
+.divide-or::after {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 45%;
+  height: 2px;
+  background-color: #c9c9c9;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
