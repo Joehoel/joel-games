@@ -1,20 +1,32 @@
+import React from 'react';
+
 interface InputProps {
   name: string;
   label: string;
-  register: any;
-  required: boolean;
-  type: string;
+  register?: any;
+  required?: boolean;
+  type?: string;
+  className?: string | undefined;
+  autocomplete?: string | undefined;
 }
 
-export const Input: React.FunctionComponent<InputProps> = ({
+export const Input: React.FC<InputProps> = ({
   name,
   label,
   register,
   required,
   type,
+  autocomplete,
+  ...props
 }) => (
   <>
     <label htmlFor={name}>{label}</label>
-    <input type={type} name={name} ref={register({ required })} />
+    <input
+      autoComplete={autocomplete}
+      {...props}
+      type={type}
+      name={name}
+      ref={register({ required })}
+    />
   </>
 );

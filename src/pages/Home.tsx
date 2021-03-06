@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../firebase';
 
-export function Home() {
+export default function Home() {
   const [user, loading, error] = useAuth();
 
   if (loading) return <div>Loading...</div>;

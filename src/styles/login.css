@@ -5,6 +5,10 @@
   place-items: center;
 }
 
+.login-secondary > *:first-child {
+  margin-bottom: 1rem;
+}
+
 .login-title {
   margin-bottom: 1.5rem;
 }

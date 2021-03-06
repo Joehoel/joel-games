@@ -1,17 +1,25 @@
 import React, { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps {
-  // size: string;
   variant: string;
-  onClick: () => Promise<void>;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  disabled?: boolean;
+  onClick?: () => Promise<void>;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant,
+  type,
+  disabled,
   ...props
 }) => (
-  <button className={`btn btn-${variant}`} {...props}>
+  <button
+    {...props}
+    disabled={disabled}
+    type={type}
+    className={`btn btn-${variant}`}
+  >
     {children}
   </button>
 );

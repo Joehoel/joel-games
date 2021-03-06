@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { auth, providers } from '../firebase';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 
 interface FormData {
   email: string;
   password: string;
 }
-export function Login() {
+export default function Login() {
   const history = useHistory();
-  const { register, handleSubmit, errors, formState } = useForm<FormData>();
+  const { register, handleSubmit, errors, formState } = useForm<FormData>({
+    mode: 'onChange',
+  });
+  const { isValid } = formState;
 
   const onSubmit = async ({ email, password }: FormData) => {
-    auth.signInWithEmailAndPassword(email, password);
+    try {
+      const user = await auth.signInWithEmailAndPassword(email, password);
+      if (user) history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const signInWithGoogle = async () => {
-    const user = await auth.signInWithPopup(providers.google);
-    if (user) history.push('/');
+    try {
+      const user = await auth.signInWithPopup(providers.google);
+      if (user) history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const signInWithGithub = async () => {
-    const user = await auth.signInWithPopup(providers.github);
-    if (user) history.push('/');
+    try {
+      const user = await auth.signInWithPopup(providers.github);
+      if (user) history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -38,8 +56,13 @@ export function Login() {
               label="Email"
               register={register}
               required={true}
-              type="email"
+              type="text"
+              autocomplete="off"
+              className={errors.email && 'error'}
             />
+            {errors.email && (
+              <span className="error">This field is required</span>
+            )}
           </div>
           <div className="form-group">
             <Input
@@ -48,25 +71,27 @@ export function Login() {
               register={register}
               required={true}
               type="password"
+              className={errors.password && 'error'}
             />
+            {errors.password && (
+              <span className="error">This field is required</span>
+            )}
           </div>
-          <button
-            className="btn btn-primary"
-            type="submit"
-            // disabled={formState.isValid}
-          >
+          <Button variant="primary" type="submit" disabled={!isValid}>
             Login
-          </button>
+          </Button>
         </form>
         <span className="divide-or">or</span>
-        <Button variant="secondary" onClick={() => signInWithGoogle()}>
-          <img src="" alt="google-logo" />
-          Login with Google
-        </Button>
-        <Button variant="secondary" onClick={() => signInWithGithub()}>
-          <img src="" alt="github-logo" />
-          Login with Github
-        </Button>
+        <div className="login-secondary">
+          <Button variant="secondary" onClick={() => signInWithGoogle()}>
+            <FcGoogle />
+            <span>Login with Google</span>
+          </Button>
+          <Button variant="secondary" onClick={() => signInWithGithub()}>
+            <FaGithub />
+            <span>Login with Github</span>
+          </Button>
+        </div>
       </div>
     </div>
   );

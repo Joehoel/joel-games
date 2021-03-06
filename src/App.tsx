@@ -1,26 +1,35 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { useAuth } from './firebase';
-import { Home, Login } from './pages';
+import ROUTES from './constants/routes';
+import Spinner from 'react-spinkit';
+
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const Pong = lazy(() => import('./pages/Pong'));
 
 function App() {
-  const [user] = useAuth();
+  const [_, loading] = useAuth();
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  if (loading) return <Spinner name="circle" />;
 
   return (
     <>
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
+        <Link to={ROUTES.LOGIN}>Login</Link>
+        <Suspense fallback={<Spinner name="circle" />}>
+          <Switch>
+            <Route exact path={ROUTES.HOME}>
+              <Home />
+            </Route>
+            <Route path={ROUTES.LOGIN}>
+              <Login />
+            </Route>
+            <Route path={ROUTES.PONG}>
+              <Pong />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </>
   );
