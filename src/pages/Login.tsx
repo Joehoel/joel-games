@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { Button } from '../components/Button';
-import { Input } from '../components/Input';
 import { auth, providers } from '../firebase';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
 
 interface FormData {
   email: string;
   password: string;
 }
+
 export default function Login() {
   const history = useHistory();
   const { register, handleSubmit, errors, formState } = useForm<FormData>({
@@ -47,8 +44,10 @@ export default function Login() {
 
   return (
     <div className="login">
-      <div className="login-container">
+      {/* <div className="login-header">
         <h1 className="login-title">Login</h1>
+      </div>
+      <div className="login-container">
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <Input
@@ -92,7 +91,7 @@ export default function Login() {
             <span>Login with Github</span>
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

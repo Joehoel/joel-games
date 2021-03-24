@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import { Button } from '@chakra-ui/button';
+import { Box, Grid } from '@chakra-ui/layout';
+import React, { useEffect, useState } from 'react';
+import { useAnimationFrame } from '../hooks/useAnimationFrame';
+import useInterpolation from '../hooks/useInterpolation';
 
 export default function Pong() {
   const WIDTH = 600;
@@ -30,10 +34,10 @@ export default function Pong() {
     x: 300,
     y: 200,
     radius: 7,
-    speed: 7,
+    speed: 3,
     velocity: {
-      x: 5,
-      y: 5,
+      x: 3,
+      y: 3,
     },
   });
 
@@ -153,9 +157,9 @@ export default function Pong() {
   };
 
   return (
-    <div className="pong">
+    <Grid placeItems="center" h="100%">
       <div className="pong-container">
-        <svg width={WIDTH} height={HEIGHT} viewBox={`0 0  `}>
+        <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
           <rect width={WIDTH} height={HEIGHT} fill="#181818" />
           <line
             x1={WIDTH / 2}
@@ -168,7 +172,7 @@ export default function Pong() {
           />
           {paddles?.map((paddle, index) => (
             <rect
-              key={`paddle-`}
+              key={`paddle-${index}`}
               transform={`translate(${paddle.x - PADDLE.width}, ${paddle.y})`}
               width={PADDLE.width}
               height={PADDLE.height}
@@ -185,8 +189,10 @@ export default function Pong() {
             className="ball"
           />
         </svg>
+        <Button colorScheme="california" onClick={start}>
+          Start
+        </Button>
       </div>
-      <button onClick={start}>Start</button>
-    </div>
+    </Grid>
   );
 }

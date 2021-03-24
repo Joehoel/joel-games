@@ -1,0 +1,30 @@
+.header {
+  width: 80%;
+  margin: 2rem auto;
+  background-color: #ffa641;
+  box-shadow: 3px 3px 0px 0px #32220b;
+  border: 3px #32220b solid;
+  color: #fff;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.header .navigation ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.header .navigation li {
+  border-right: #32220b 3px solid;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.header .navigation li:hover {
+  background-color: #af6900;
+}
+
+.header .navigation li.active {
+  background-color: #af6900;
+}
